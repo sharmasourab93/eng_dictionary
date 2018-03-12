@@ -22,7 +22,6 @@ I have used the following Python modules :
 	1. urllib : To fetch the resources from Cambridge university url for Word meaning
 	2. bs4: To parse the innerHTML for the word's meaning from the Cambridge University site 
 	3. sqlite3: To lookup for the meaning of the word in the database if it exists else, for parsing and inserting into the database
-	4. socket: To check for an proper internet connection while retrieving the word.
 
 References for building the package: 
 http://www.diveintopython3.net/packaging.html
