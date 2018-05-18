@@ -7,7 +7,8 @@ Once the meaning has been inserted into the dictionary database, look up takes O
 
 Direction to install: 
 
-	Download the package.
+	Download the package or on the command line type 
+		"pip install eng-dictionary"
 	Extract from the Zip Folder
 	Use the following command from on this location on the command prompt: 
 		"python -m pip install ."
@@ -24,5 +25,5 @@ I have used the following Python modules :
 	3. sqlite3: To lookup for the meaning of the word in the database if it exists else, for parsing and inserting into the database
 
 References for building the package: 
-http://www.diveintopython3.net/packaging.html
+https://blog.jetbrains.com/pycharm/2017/05/how-to-publish-your-package-on-pypi/
 		
