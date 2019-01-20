@@ -102,7 +102,7 @@ class Dictionary:
 								return surf
 				
 				@staticmethod
-				def washing_string(self, string):
+				def washing_string(string):
 								""" To remove unwanted characters in the string """
 								
 								string_set = {'A1', 'A2', 'B1', 'B2', 'C1', 'C2', 'D1', 'D2', ':', '›', '[', ']'}
