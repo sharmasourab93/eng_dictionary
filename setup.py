@@ -2,7 +2,7 @@
 from distutils.core import setup
 
 setup(name='eng_dictionary',
-      version='1.0',
+      version='1.1',
       author='Sourab Sharma',
       author_email='sharmasourab93@gmail.com',
       license='MIT',
@@ -10,5 +10,5 @@ setup(name='eng_dictionary',
       description='A BS4 based English Dictinonary',
       long_description=open('README.txt').read(),
       packages=['eng_dictionary'],
-      classifiers=["Programming Language:: Python","Programming Language :: Python :: 3"],      
+      classifiers=["Programming Language:: Python", "Programming Language :: Python :: 3"],
       )

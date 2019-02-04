@@ -20,9 +20,10 @@ class BrowseMeaning:
 				
 				def __init__(self, key):
 								self.key = key
-								self.word = self.mean()
+								self.word = self.mean
 								self.search()
 				
+				@property
 				def mean(self):
 								return MeaningVar()
 				
