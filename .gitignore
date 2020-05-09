@@ -7,18 +7,16 @@ Desktop.ini
 
 # Recycle Bin used on file shares
 $RECYCLE.BIN/
-
+/__pycache__/
+/.idea/
+/dist/
+/dictionary.egg-info/
 # Windows Installer files
 *.cab
 *.msi
 *.msm
 *.msp
 *.exe
-
-
 # Windows shortcuts
 *.lnk
 
-/dist
-
-/eng_dictionary/__pycache__
