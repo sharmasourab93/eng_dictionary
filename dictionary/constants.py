@@ -1,8 +1,7 @@
 TAG = "div"
 CLASS = "def ddef_d db"
-TABLE_NAME = 'Dictionary'
-CREATE_TABLE = "CREATE TABLE {}" \
+CREATE_TABLE = "CREATE TABLE Dictionary" \
                "(word text primary key," \
-               "meaning text);".format(TABLE_NAME)
-INSERT_IN_TABLE = "INSERT into {}} (word, meaning) " \
-                  "VALUES(?, ?)".format(TABLE_NAME)
+               "meaning text);"
+INSERT_IN_TABLE = "INSERT into Dictionary (word, meaning) " \
+                  "VALUES(?, ?)"

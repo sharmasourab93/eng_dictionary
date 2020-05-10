@@ -6,10 +6,14 @@ class DBConn:
     """ SQLite Database operations """
     
     def __init__(self):
-        self.db = sqlite3.connect("dict.db")
+        self.db = self.connect()
         self.db_iterator = self.db.cursor()
         self.create_table()
     
+    def connect(self):
+        self.db = sqlite3.connect("dict.db")
+        return self.db
+        
     def close(self):
         self.db.close()
     

@@ -38,4 +38,4 @@ class BrowseMeaning:
             return None
         
         except ConnectionError as e:
-            return "Connection Error"
+            raise ConnectionError("Connection Error")
