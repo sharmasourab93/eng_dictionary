@@ -1,7 +1,7 @@
 from os import remove, path
 from unittest import TestCase, main
 from dictionary import DBConn
-from sqlite3 import OperationalError, ProgrammingError
+from sqlite3 import OperationalError, ProgrammingError, IntegrityError
 
 
 class TestDBConn(TestCase):
@@ -47,8 +47,10 @@ class TestDBConn(TestCase):
         self.assertEqual(self.dbconn.db_iterator.execute(
             query.format(wrong_word)).fetchone(), None)
 
-        #self.dbconn.insert_data(word, meaning)
-        #self.assertRaises()
+        self.assertRaises(IntegrityError,
+                          self.dbconn.insert_data,
+                          word,
+                          meaning)
         
     def test_fetch_one(self):
         key_1, meaning_1 = 'precious', \
@@ -78,8 +80,6 @@ class TestDBConn(TestCase):
         all_items = self.dbconn.fetchall()
         self.assertEqual(len(all_items), 2)
         
-        
-    
 
 if __name__ == '__main__':
     main()
