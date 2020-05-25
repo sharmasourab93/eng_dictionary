@@ -1,0 +1,14 @@
+Metadata-Version: 1.2
+Name: eng-dictionary
+Version: 0.0.3
+Summary: A BS4 based English Dictionary
+Home-page: https://github.com/sharmasourab93/eng_dictionary
+Author: Sourab Sharma
+Author-email: sharmasourab93@gmail.com
+License: UNKNOWN
+Description: UNKNOWN
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.6

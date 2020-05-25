@@ -1,7 +1,7 @@
 from requests import get
 from requests.exceptions import ConnectionError
 from bs4 import BeautifulSoup as Bs
-from constants import TAG, CLASS
+from .constants import TAG, CLASS
 
 
 class BrowseMeaning:

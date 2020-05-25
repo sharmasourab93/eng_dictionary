@@ -1,0 +1,12 @@
+README.md
+setup.py
+dictionary/__init__.py
+dictionary/browse_meaning.py
+dictionary/constants.py
+dictionary/db_conn.py
+dictionary/dictionary.py
+eng_dictionary.egg-info/PKG-INFO
+eng_dictionary.egg-info/SOURCES.txt
+eng_dictionary.egg-info/dependency_links.txt
+eng_dictionary.egg-info/requires.txt
+eng_dictionary.egg-info/top_level.txt
