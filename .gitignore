@@ -20,3 +20,5 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
+/eng_dictionary.egg-info/
+/dictionary.egg-info/
