@@ -1,28 +1,38 @@
-from .db_conn import DBConn
+from .redis_extension import ConnectRedis
 from .browse_meaning import BrowseMeaning
 
 
 class Dictionary:
+    # Dictionary Object with Redis extension needs
+    # a host and a port argument to connect with a
+    # redis server and perform the relevant redis ops.
+    def __init__(self, host, port):
+        self.redis = ConnectRedis(host, port)
     
     def lookup(self, key):
-        db_connect = DBConn()
-        query_result = db_connect.fetch_one(key)
+        """Looks up for the word's meaning in the redis-server"""
         
-        if query_result is None:
+        result = self.redis.fetch_one(key)
+        
+        if result is None:
             mean = self.browse_meaning(key)
-            db_connect.insert_data(key, mean)
+            self.redis.insert_data(key, mean)
             return {key: mean}
         
         else:
-            return query_result
+            return {key: result}
         
     def browse_meaning(self, key):
+        """Browse Meaning of the word"""
         
         browse = BrowseMeaning()
         meaning = browse.search(key)
+        
         if meaning is not None:
             return meaning
+        
         elif meaning is None:
             return None
+        
         else:
             return "Connection to host failed."
