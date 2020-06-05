@@ -17,21 +17,25 @@ class TestDictionary(TestCase):
                        " meaning and can be spoken or written: "
     
     def test_lookup(self):
-        lookup_1 = self.dict_.lookup(self.key)
-        
-        if lookup_1 == self.conn_fail:
-            self.assertEqual(lookup_1, self.conn_fail)
-        else:
-            dict_1 = {self.key: self.meaning_1}
-            self.assertEqual(lookup_1, dict_1)
+        import redis
+        try:
+            lookup_1 = self.dict_.lookup(self.key)
             
-            lookup_2 = self.dict_.lookup(self.word)
-            dict_2 = {self.word: self.meaning}
-            self.assertEqual(lookup_2, dict_2)
-            
-            lookup_3 = self.dict_.lookup(self.wrong_word)
-            dict_3 = {self.wrong_word: None}
-            self.assertEqual(lookup_3, dict_3)
+            if lookup_1 == self.conn_fail:
+                self.assertEqual(lookup_1, self.conn_fail)
+            else:
+                dict_1 = {self.key: self.meaning_1}
+                self.assertEqual(lookup_1, dict_1)
+                
+                lookup_2 = self.dict_.lookup(self.word)
+                dict_2 = {self.word: self.meaning}
+                self.assertEqual(lookup_2, dict_2)
+                
+                lookup_3 = self.dict_.lookup(self.wrong_word)
+                dict_3 = {self.wrong_word: None}
+                self.assertEqual(lookup_3, dict_3)
+        except redis.exceptions.ConnectionError:
+            self.assertRaises(redis.exceptions.ConnectionError)
         
     def test_browsing(self):
         browse = self.dict_.browse_meaning(self.key)
