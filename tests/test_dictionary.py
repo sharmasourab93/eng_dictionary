@@ -4,32 +4,23 @@ from os import remove, path
 
 
 class TestDictionary(TestCase):
-    
-    @classmethod
-    def setUpClass(cls) -> None:
-        if path.exists('dict.db'):
-            remove('dict.db')
             
     def setUp(self) -> None:
-        self.dict_ = Dictionary()
+        host, port = '192.168.43.65', 6379
+        self.dict_ = Dictionary(host, port)
         self.key, self.word = 'precious', 'word'
         self.wrong_word = 'abcd'
         self.conn_fail = "Connection to host failed."
         self.meaning_1 = "of great value because of being " \
-                           "rare, expensive, or important: "
+                         "rare, expensive, or important: "
         self.meaning = "a single unit of language that has" \
-                                " meaning and can be spoken or written: "
-        
-    @classmethod
-    def tearDownClass(cls) -> None:
-        if path.exists('dict.db'):
-            remove('dict.db')
+                       " meaning and can be spoken or written: "
     
     def test_lookup(self):
         lookup_1 = self.dict_.lookup(self.key)
-        if lookup_1[self.key] == self.conn_fail :
-            self.assertEqual(lookup_1[self.key],
-                             self.conn_fail)
+        
+        if lookup_1 == self.conn_fail:
+            self.assertEqual(lookup_1, self.conn_fail)
         else:
             dict_1 = {self.key: self.meaning_1}
             self.assertEqual(lookup_1, dict_1)
