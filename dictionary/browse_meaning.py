@@ -1,7 +1,7 @@
 from requests import get
 from requests.exceptions import ConnectionError
 from bs4 import BeautifulSoup as Bs
-from .constants import TAG, CLASS
+from constants import TAG, CLASS, HTTP_HEADER
 
 
 class BrowseMeaning:
@@ -18,11 +18,11 @@ class BrowseMeaning:
         Searching the meaning on the
         Cambridge on Cambridge University site.
         """
-        url = 'http://dictionary.cambridge.org/dictionary/english/' +\
+        url = 'https://dictionary.cambridge.org/dictionary/english/' +\
               str(key)
         
         try:
-            raw_data = get(url)
+            raw_data = get(url, headers=HTTP_HEADER)
             soup = Bs(raw_data.text, 'html.parser')
             
             # Soup method to extract the

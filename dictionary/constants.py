@@ -5,3 +5,4 @@ CREATE_TABLE = "CREATE TABLE Dictionary" \
                "meaning text);"
 INSERT_IN_TABLE = "INSERT into Dictionary (word, meaning) " \
                   "VALUES(?, ?)"
+HTTP_HEADER = {"User-Agent": "Mozilla/5.0"}
