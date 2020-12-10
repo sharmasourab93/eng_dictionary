@@ -39,3 +39,9 @@ class BrowseMeaning:
         
         except ConnectionError as e:
             raise ConnectionError("Connection Error")
+
+
+if __name__ == '__main__':
+    obj = BrowseMeaning()
+    result = obj.search('precious')
+    print(result)
