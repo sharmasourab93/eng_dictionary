@@ -1,50 +1,50 @@
-import socket
 from unittest import TestCase, main
-from unittest.mock import patch
-from requests.exceptions import ConnectionError
+from unittest.mock import patch, Mock
 from dictionary import BrowseMeaning
+import requests
+from constants import HTTP_HEADER, TAG, CLASS, PARSER
+from bs4 import BeautifulSoup as Bs
 
 
 class TestBrowseMeaning(TestCase):
     
-    @classmethod
-    def setUpClass(cls):
-        pass
-    
-    @classmethod
-    def tearDownClass(cls):
-        pass
-    
     def setUp(self):
-        self.browse = BrowseMeaning()
         self.rword = 'precious'
-        self.meaning = "of great value because of being " \
-                       "rare, expensive, or important: "
-        self.wrong_word = 'abcd'
-    
-    def test_search(self):
-        try:
-            with patch('requests.get') as mocked_get:
-                mocked_get.return_val.ok = True
-                mocked_get.return_val.text = self.meaning
+        self.url = 'https://dictionary.cambridge.org/' \
+                   'dictionary/english/'
         
-                search = self.browse.search(self.rword)
-                mocked_get("https://dictionary.cambridge"
-                           ".org/dictionary/english/{}"
-                           .format(self.rword))
-                self.assertEqual(search, self.meaning)
+    @patch('dictionary.browse_meaning.get')
+    @patch('dictionary.BrowseMeaning.request_word')
+    def test_request_word(self, mock_obj, get):
+        mock_obj.return_value = Mock(return_value=get(self.rword))
+        class_ = BrowseMeaning()
+        result_1 = class_.request_word(self.rword)
+        self.assertEqual(mock_obj.return_value, result_1)
         
-                mocked_get.return_val.ok = False
-                search = self.browse.search(self.wrong_word)
-                mocked_get("https://dictionary.cambridge"
-                           ".org/dictionary/english/{}"
-                           .format(self.wrong_word))
-                self.assertEqual(search, None)
-                
-        except (socket.gaierror,
-                ConnectionError):
-            pass
-
+    @patch('dictionary.BrowseMeaning.extract_word')
+    def test_extract_word(self, mock_obj):
+        data = Mock(return_value=requests.get(self.url + self.rword,
+                                              headers=HTTP_HEADER))
+        soup = Mock(return_value=Bs(data.return_value.text,
+                                    PARSER))
+        soup = Mock(return_value=soup.find(TAG,
+                                           {"class": CLASS})
+                    .get_text())
+        mock_obj.return_value = Mock(return_value=soup.return_value)
+        
+        class_ = BrowseMeaning()
+        result_1 = class_.extract_word(self.rword)
+        self.assertEqual(mock_obj.return_value, result_1)
+        
+    @patch('dictionary.BrowseMeaning.extract_word')
+    @patch('dictionary.BrowseMeaning.search')
+    def test_search(self, mock_obj, word_getter):
+        mock_obj.return_value = Mock(return_value=
+                                     word_getter.return_value)
+        class_ = BrowseMeaning()
+        result = class_.search(self.rword)
+        self.assertEqual(mock_obj.return_value, result)
+        
 
 if __name__ == '__main__':
     main()
