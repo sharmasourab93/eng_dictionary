@@ -1,5 +1,5 @@
 import sqlite3
-from .constants import CREATE_TABLE, INSERT_IN_TABLE
+from constants import CREATE_TABLE, INSERT_IN_TABLE
 
 
 class DBConn:
